@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Code Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #61dafb;
+            margin-bottom: 10px;
+        }
+
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .editor-container {
+                flex-direction: row;
+            }
+        }
+
+        .editor-panel {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .panel-header {
+            background-color: #2d2d2d;
+            padding: 10px 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-editor {
+            background-color: #2d2d2d;
+            height: 300px;
+            overflow: auto;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border: none;
+            padding: 15px;
+            resize: none;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            tab-size: 4;
+        }
+
+        textarea:focus {
+            outline: none;
+        }
+
+        .preview-panel {
+            background-color: white;
+            color: black;
+            padding: 15px;
+            height: 300px;
+            overflow: auto;
+        }
+
+        .console-panel {
+            background-color: #1e1e1e;
+            border-top: 1px solid #333;
+            padding: 15px;
+            height: 150px;
+            overflow: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .console-log {
+            color: #f0f0f0;
+            margin-bottom: 5px;
+        }
+
+        .console-error {
+            color: #ff6b6b;
+            margin-bottom: 5px;
+        }
+
+        .console-warn {
+            color: #ffe066;
+            margin-bottom: 5px;
+        }
+
+        .button {
+            background-color: #61dafb;
+            color: #1e1e1e;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .button:hover {
+            background-color: #4ec5e3;
+        }
+
+        .run-button {
+            background-color: #47d864;
+        }
+
+        .run-button:hover {
+            background-color: #3bbf54;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Simple Code Editor</h1>
+            <p>Write HTML, CSS, and JavaScript, then see the results in real-time</p>
+        </header>
+
+        <div class="editor-container">
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <span>HTML</span>
+                </div>
+                <div class="code-editor">
+                    <textarea id="html-code" placeholder="Write your HTML here"><!-- Write your HTML here -->
+<div class="card">
+    <h2>Welcome to the Code Editor</h2>
+    <p>This is a simple example. Try editing the code!</p>
+    <button id="demo-button">Click Me</button>
+</div></textarea>
+                </div>
+            </div>
+
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <span>CSS</span>
+                </div>
+                <div class="code-editor">
+                    <textarea id="css-code" placeholder="Write your CSS here">/* Write your CSS here */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    max-width: 400px;
+}
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+p {
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}</textarea>
+                </div>
+            </div>
+
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <span>JavaScript</span>
+                </div>
+                <div class="code-editor">
+                    <textarea id="js-code" placeholder="Write your JavaScript here">// Write your JavaScript here
+document.getElementById('demo-button').addEventListener('click', function() {
+    console.log('Button was clicked!');
+    alert('Hello from the Code Editor!');
+});
+
+// Example of logging different types
+console.log('This is a regular log message');
+console.warn('This is a warning message');
+console.error('This is an error message');</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-header">
+            <span>Output Preview</span>
+            <button id="run-button" class="button run-button">Run Code</button>
+        </div>
+        <div id="preview" class="preview-panel">
+            <!-- Preview will be rendered here -->
+        </div>
+
+        <div class="panel-header">
+            <span>Console</span>
+            <button id="clear-console" class="button">Clear Console</button>
+        </div>
+        <div id="console" class="console-panel">
+            <!-- Console output will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const htmlCode = document.getElementById('html-code');
+            const cssCode = document.getElementById('css-code');
+            const jsCode = document.getElementById('js-code');
+            const runButton = document.getElementById('run-button');
+            const clearConsoleButton = document.getElementById('clear-console');
+            const preview = document.getElementById('preview');
+            const consoleOutput = document.getElementById('console');
+            
+            // Override console methods to capture output
+            const originalConsoleLog = console.log;
+            const originalConsoleError = console.error;
+            const originalConsoleWarn = console.warn;
+            
+            console.log = function(...args) {
+                originalConsoleLog.apply(console, args);
+                appendToConsole(args, 'log');
+            };
+            
+            console.error = function(...args) {
+                originalConsoleError.apply(console, args);
+                appendToConsole(args, 'error');
+            };
+            
+            console.warn = function(...args) {
+                originalConsoleWarn.apply(console, args);
+                appendToConsole(args, 'warn');
+            };
+            
+            function appendToConsole(args, type) {
+                const message = args.map(arg => {
+                    if (typeof arg === 'object') {
+                        return JSON.stringify(arg);
+                    }
+                    return arg;
+                }).join(' ');
+                
+                const div = document.createElement('div');
+                div.className = `console-${type}`;
+                div.textContent = message;
+                consoleOutput.appendChild(div);
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            }
+            
+            function runCode() {
+                // Clear previous preview
+                preview.innerHTML = '';
+                
+                // Get code from editors
+                const html = htmlCode.value;
+                const css = cssCode.value;
+                const js = jsCode.value;
+                
+                // Create iframe for safe execution
+                const iframe = document.createElement('iframe');
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.border = 'none';
+                preview.appendChild(iframe);
+                
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                
+                // Write HTML, CSS, and JS to iframe
+                iframeDoc.open();
+                iframeDoc.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <style>${css}</style>
+                    </head>
+                    <body>
+                        ${html}
+                        <script>${js}<\/script>
+                    </body>
+                    </html>
+                `);
+                iframeDoc.close();
+            }
+            
+            // Event listeners
+            runButton.addEventListener('click', runCode);
+            clearConsoleButton.addEventListener('click', () => {
+                consoleOutput.innerHTML = '';
+            });
+            
+            // Auto-run code after a short delay when typing stops
+            let timeout;
+            function scheduleRun() {
+                clearTimeout(timeout);
+                timeout = setTimeout(runCode, 1000);
+            }
+            
+            htmlCode.addEventListener('input', scheduleRun);
+            cssCode.addEventListener('input', scheduleRun);
+            jsCode.addEventListener('input', scheduleRun);
+            
+            // Run code on initial load
+            runCode();
+        });
+    </script>
+</body>
+</html>
